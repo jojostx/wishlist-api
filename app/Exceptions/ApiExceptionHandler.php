@@ -16,12 +16,12 @@ class ApiExceptionHandler
      */
     public static function handle(Throwable $e, Request $request)
     {
-        // 1. If it's not an API request, let Laravel handle it normally (HTML)
+        // If it's not an API request, let Laravel handle it normally (HTML)
         if (! $request->is('api/*') && ! $request->wantsJson()) {
             return null; // returning null tells Laravel to use default handling
         }
 
-        // 2. Handle specific exceptions
+        // Handle specific exceptions
         if ($e instanceof ModelNotFoundException || $e instanceof NotFoundHttpException) {
             return response()->json([
                 'status' => 'Error has occurred.',
@@ -46,7 +46,7 @@ class ApiExceptionHandler
             ], 422);
         }
 
-        // 3. Handle defaults (500 Internal Server Error)
+        // Handle defaults (500 Internal Server Error)
         // Be careful exposing real error messages in production!
         $message = app()->isLocal() ? $e->getMessage() : 'Server error.';
         
