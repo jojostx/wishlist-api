@@ -12,7 +12,7 @@ use Throwable;
 class ApiExceptionHandler
 {
     /**
-     * Render the exception into an HTTP response.
+     * Render API exceptions into standardized JSON responses.
      */
     public static function handle(Throwable $e, Request $request)
     {

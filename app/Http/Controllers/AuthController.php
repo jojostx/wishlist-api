@@ -15,6 +15,9 @@ class AuthController extends Controller
 {
     use HttpResponses;
 
+    /**
+     * Authenticate a user and return a Sanctum token with the user profile.
+     */
     public function login(LoginUserRequest $request)
     {
         $credentials = $request->validated();
@@ -31,6 +34,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Register a new user and return a Sanctum token with the user profile.
+     */
     public function register(RegisterUserRequest $request)
     {
         $data = $request->validated();
@@ -47,6 +53,9 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Revoke the current access token for the authenticated user.
+     */
     public function logout(Request $request)
     {
         $token = $request->user()->currentAccessToken();
