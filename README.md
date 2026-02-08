@@ -1,9 +1,14 @@
 # Wishlist API
 
-Laravel E-Commerce Feature – “Wishlist” Functionality
+Repository:
+```text
+https://github.com/jojostx/wishlist-api
+```
+
+Laravel E-Commerce Feature - "Wishlist" Functionality
 
 ## Overview
-A Back-End Laravel application that provides a “Wishlist” feature for an e-commerce environment. The application should allow users to sign up, log in, and then add, view, and remove products from their wishlists.
+A Back-End Laravel application that provides a "Wishlist" feature for an e-commerce environment. The application should allow users to sign up, log in, and then add, view, and remove products from their wishlists.
 
 **Requirements**
 - PHP 8.2+
