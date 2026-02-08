@@ -17,13 +17,13 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
-        $request->validated($request->all());
+        $credentials = $request->validated();
 
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt($credentials)) {
             return $this->error('', 'Credentials do not match', 401);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $credentials['email'])->first();
 
         return $this->success([
             'user' => new UserResource($user),
@@ -33,12 +33,12 @@ class AuthController extends Controller
 
     public function register(RegisterUserRequest $request)
     {
-        $request->validated($request->all());
+        $data = $request->validated();
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
         return $this->success([
@@ -49,7 +49,11 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $token = $request->user()->currentAccessToken();
+
+        if ($token && method_exists($token, 'delete')) {
+            $token->delete();
+        }
 
         return $this->success([
             'message' => 'You have successfully been logged out and your token has been deleted',
