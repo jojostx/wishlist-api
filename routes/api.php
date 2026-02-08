@@ -20,4 +20,14 @@ Route::apiResource('products', ProductController::class)
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
+
+    // Wishlist Routes (using dot notation for clarity)
+    Route::get('/wishlist', [WishlistController::class, 'index'])
+        ->name('wishlist.index');
+
+    Route::post('/wishlist', [WishlistController::class, 'store'])
+        ->name('wishlist.store');
+
+    Route::delete('/wishlist/{product}', [WishlistController::class, 'destroy'])
+        ->name('wishlist.destroy');
 });
