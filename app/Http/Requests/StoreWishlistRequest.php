@@ -11,8 +11,6 @@ class StoreWishlistRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // We return true because the 'auth:sanctum' middleware 
-        // on the route already handles authentication.
         return true;
     }
 
